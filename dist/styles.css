@@ -1,0 +1,140 @@
+/* Reseteo básico de márgenes y rellenos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general del contenedor principal */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Altura mínima de la ventana gráfica */
+    margin: 0; /* Eliminar márgenes predeterminados */
+}
+
+/* Estilo del contenedor principal */
+#container {
+    max-width: 800px;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 100%; /* Asegura que el contenedor no exceda el ancho de la ventana */
+    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+}
+
+/* Estilo del encabezado */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+}
+
+/* Estilo del contenedor de puntajes */
+#score {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+#score p {
+    margin: 0;
+}
+
+/* Estilo del contenedor principal de la pregunta */
+main {
+    padding: 10px;
+}
+
+#question-container {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #e0e0e0;
+}
+
+/* Estilo para los botones */
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #fff;
+}
+
+#verify-button {
+    background-color: #4caf50;
+}
+
+#verify-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#next-button {
+    background-color: #2196f3;
+}
+
+#next-button:hover {
+    background-color: #0b7dda;
+    transform: scale(1.05);
+}
+
+/* Estilo del mensaje de feedback */
+#feedback-message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    color: #ff6f6f;
+}
+
+/* Estilo para los botones de respuesta */
+#answer-buttons div {
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #4caf50; /* Color de acento en modo oscuro */
+}
+
+/* Estilo del contenedor de controles */
+#controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Diseño responsivo */
+@media (max-width: 600px) {
+    #score {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #score p {
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
+}
