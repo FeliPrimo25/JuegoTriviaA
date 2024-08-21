@@ -7,8 +7,6 @@ const correctCountElement = document.getElementById('correct-count');
 const incorrectCountElement = document.getElementById('incorrect-count');
 const currentQuestionElement = document.getElementById('current-question');
 const totalQuestionsElement = document.getElementById('total-questions');
-const correctAnswersButton = document.createElement('button');
-const accuracyElement = document.createElement('p');
 
 let questions = [];
 let currentQuestionIndex = 0;
@@ -16,26 +14,6 @@ let feedbackText = '';
 let isAnswerChecked = false;
 let correctCount = 0;
 let incorrectCount = 0;
-
-// Estilo para el botón "Ver Respuestas Correctas"
-correctAnswersButton.textContent = 'Ver Respuestas Correctas';
-correctAnswersButton.style.display = 'none';
-correctAnswersButton.style.backgroundColor = '#ff5722';
-correctAnswersButton.style.color = '#fff';
-correctAnswersButton.style.padding = '10px 20px';
-correctAnswersButton.style.margin = '10px';
-correctAnswersButton.style.borderRadius = '5px';
-correctAnswersButton.style.border = 'none';
-correctAnswersButton.style.cursor = 'pointer';
-document.getElementById('controls').appendChild(correctAnswersButton);
-
-// Estilo para el porcentaje de aciertos
-accuracyElement.textContent = 'Porcentaje de aciertos: 0%';
-accuracyElement.style.textAlign = 'center';
-accuracyElement.style.fontSize = '18px';
-accuracyElement.style.color = '#ffffff';
-accuracyElement.style.marginTop = '20px';
-document.querySelector('header').appendChild(accuracyElement);
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -97,7 +75,6 @@ function showQuestion(question) {
 
     nextButton.style.display = 'none';
     verifyButton.style.display = 'block';
-    correctAnswersButton.style.display = 'none';
     feedbackMessage.style.display = 'none';
     isAnswerChecked = false;
     currentQuestionElement.textContent = currentQuestionIndex + 1;
@@ -115,8 +92,10 @@ function checkAnswers() {
     if (question.multipleCorrect) {
         allSelectedCorrectly = correctAnswers.length === selectedAnswers.length && correctAnswers.every(answer => selectedAnswers.includes(answer));
 
+        // Determine feedback message
         feedbackText = allSelectedCorrectly ? '¡Correcto!' : 'Incorrecto. Intenta de nuevo.';
 
+        // Update feedback for multiple choice
         Array.from(answerButtons.querySelectorAll('input')).forEach(input => {
             if (input.dataset.correct === 'true' && input.checked) {
                 input.parentElement.classList.add(allSelectedCorrectly ? 'correct' : 'incorrect');
@@ -134,8 +113,10 @@ function checkAnswers() {
             allSelectedCorrectly = selectedInput.dataset.correct === 'true';
         }
 
+        // Determine feedback message
         feedbackText = allSelectedCorrectly ? '¡Correcto!' : 'Incorrecto. Intenta de nuevo.';
 
+        // Update feedback for single choice
         Array.from(answerButtons.querySelectorAll('input')).forEach(input => {
             if (input.dataset.correct === 'true' && input.checked) {
                 input.parentElement.classList.add(allSelectedCorrectly ? 'correct' : 'incorrect');
@@ -159,29 +140,10 @@ function checkAnswers() {
         correctCount++;
     } else {
         incorrectCount++;
-        correctAnswersButton.style.display = 'block';
     }
 
     correctCountElement.textContent = correctCount;
     incorrectCountElement.textContent = incorrectCount;
-
-    updateAccuracy();
-}
-
-function updateAccuracy() {
-    const totalAnswered = correctCount + incorrectCount;
-    const accuracy = ((correctCount / totalAnswered) * 100).toFixed(2);
-    accuracyElement.textContent = `Porcentaje de aciertos: ${accuracy}%`;
-}
-
-function showCorrectAnswers() {
-    Array.from(answerButtons.querySelectorAll('input')).forEach(input => {
-        if (input.dataset.correct === 'true') {
-            input.parentElement.classList.add('correct');
-        } else {
-            input.parentElement.classList.remove('correct');
-        }
-    });
 }
 
 function nextQuestion() {
@@ -192,7 +154,6 @@ function nextQuestion() {
         questionContainer.innerHTML = '¡Has terminado el juego!';
         answerButtons.innerHTML = '';
         nextButton.style.display = 'none';
-        correctAnswersButton.style.display = 'none';
     }
 }
 
@@ -207,10 +168,6 @@ nextButton.addEventListener('click', () => {
         feedbackMessage.textContent = 'Por favor, verifica tu respuesta antes de continuar.';
         feedbackMessage.style.display = 'block';
     }
-});
-
-correctAnswersButton.addEventListener('click', () => {
-    showCorrectAnswers();
 });
 
 startGame();
