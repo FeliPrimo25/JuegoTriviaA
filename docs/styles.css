@@ -138,3 +138,12 @@ input[type="checkbox"], input[type="radio"] {
         font-size: 18px;
     }
 }
+
+#show-correct-button {
+    background-color: #ff9800;
+}
+
+#show-correct-button:hover {
+    background-color: #e68900;
+    transform: scale(1.05);
+}
